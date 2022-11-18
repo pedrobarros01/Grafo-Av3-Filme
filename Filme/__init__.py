@@ -1,2 +1,2 @@
 import imp
-from filme import Filme
+from .filme import Filme

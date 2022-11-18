@@ -1,33 +1,59 @@
 
-
-
-
 class Filme:
     def __init__(self, name, genre) -> None:
-        self.name = name
-        self.genre = genre
-        self.peso = 0
+        self._name = name
+        self._genre = genre
     
-    def definirPeso(self):
-        # criar uma lei para definir os pesos
-        pass
+    def ligar(self, filmeB):
+        if self.genre.upper() == filmeB.genre.upper():
+            return True
+        return False
+    
+    @property
+    def genre(self):
+        return self._genre
+
+    @genre.setter
+    def genre(self, genre):
+        self._genre = genre
+
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, name):
+        self._name = name
+    
+
+    def __str__(self) -> str:
+        return f'===Filme===\nNome: {self._name}\nGenero: {self._genre}'
+
+    ## Quantidade de recomendação dos filmes
+    @classmethod
+    def saberEscala(cls, reccomendationVector):
+        dicGenero = {
+            'ação': 0,
+            'comédia': 0,
+            'terror': 0,
+            'suspense': 0,
+            'ficção': 0,
+            'romance': 0
+        }
+        for filme in reccomendationVector:
+            if filme.genre == 'ação':
+                dicGenero["ação"] += 1
+            if filme.genre == 'comédia':
+                dicGenero["comédia"] += 1
+            if filme.genre == 'terror':
+                dicGenero["terror"] += 1
+            if filme.genre == 'suspense':
+                dicGenero["suspense"] += 1
+            if filme.genre == 'ficção':
+                dicGenero["ficção"] += 1
+            if filme.genre == 'romance':
+                dicGenero["romance"] += 1
+        return dicGenero
+    
 
 
-vetFilmes = []
-filme1 = Filme("drive(2011)", "ação")
-filme2 = Filme("truque de mestre", "ação")
-filme3 = Filme("se beber nao case", "comédia")
-filme4 = Filme("se beber nao case 2", "comédia")
-filme5 = Filme("jogos mortais", "terror")
-filme6 = Filme("a freira", "terror")
-filme7 = Filme("meu malvado favorito 2", "comédia")
-filme8 = Filme("se7en", "suspense")
-filme9 = Filme("vingadores", "ação")
-filme10 = Filme("interstellar", "ficção")
-filme11 = Filme("matrix", "ficção")
-filme12 = Filme("morbius", "ação")
-filme13 = Filme("inception", "ficção")
-filme14 = Filme("o melhor de mim", "romance")
-filme15 = Filme("diário de uma paixão", "romance")
-
-#neh esse nao
