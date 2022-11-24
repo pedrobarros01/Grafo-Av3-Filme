@@ -1,8 +1,28 @@
-from mocks import filmes
+from mocks import filmes, listaGeneros
+from graph import Grafos
+
+def preecherAresta(listaFilme, grafo):
+    for i in range(0, len(listaFilme)):
+        if(i < 5):
+            grafo.adj['acao'].append(listaFilme[i])
+        elif(i < 10):
+            grafo.adj['comedia'].append(listaFilme[i])
+        elif(i < 15):
+            grafo.adj['terror'].append(listaFilme[i])
+        elif(i < 20):
+            grafo.adj['suspense'].append(listaFilme[i])
+        elif(i < 25):
+            grafo.adj['ficcao'].append(listaFilme[i])
+        elif(i < 30):
+            grafo.adj['romance'].append(listaFilme[i])
+
 if __name__ == '__main__':
     user = []
     reccomendationVector = []
     operacao = True
+    grafo = Grafos(len(listaGeneros), listaGeneros)
+    preecherAresta(filmes, grafo)
+    grafo.printarGrafos()
     '''
     R -> buscar recomendação
     V -> Ver filme, adicionar no vetor User

@@ -1,6 +1,44 @@
 from collections import defaultdict
 from Filme import Filme
 
+class Grafos:
+    def __init__(self, vertice, listaGeneros, dirigido = False) -> None:
+        self.vertice = vertice
+        self.dirigido = dirigido
+        self.adj = defaultdict(list)
+        for genero in listaGeneros:
+            self.adj[genero.name]
+        print(self.adj)
+        for genero in listaGeneros:
+            if genero.name != 'genero':
+                self.adj['genero'].append(genero)
+        print(self.adj)
+        print(len(self.adj['genero']))
+
+    def adicionarAresta(self, filmeA, generoB):
+        if filmeA.genre != generoB.genre:
+            raise ValueError('Genero de <Filme> e <Genero> nao coincide')
+        self.adj[generoB.genre].append(filmeA)
+        if not self.dirigido:
+            self.adj[filmeA.name].append(generoB)
+    
+    def printarGrafos(self):
+        for vertice in self.adj:
+            print(f'{vertice}: {self.adj.get(vertice)[0].name}')
+
+    def dfs(self, fonte):
+        lista = [False for i in self.vertice]
+ 
+        def dfsAuxiliar(grafo, listaVisitado, vertice):
+            #listaVisitado
+            pass
+        dfsAuxiliar(self.adj, lista, fonte)
+
+            
+        
+
+
+
 class Grafo(Filme):
     """ Implementação básica de um grafo. """
 
@@ -69,3 +107,4 @@ def dfs(grafo, vertice):
     dfs_iterativa(grafo, vertice)
 
 #Fonte: https://algoritmosempython.com.br/  
+#https://algoritmosempython.com.br/cursos/algoritmos-python/algoritmos-grafos/busca-profundidade/
