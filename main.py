@@ -1,27 +1,33 @@
+from Filme.filme import Filme
 from mocks import filmes, listaGeneros
 from graph import Grafos
 
-def preecherAresta(listaFilme, grafo):
+def procurarPorGenero(listaDeGenero, genero):
+    for genre in listaDeGenero:
+        if genre.name == genero:
+            return genre
+
+def preecherAresta(listaFilme, grafo, listaDeGenero):
     for i in range(0, len(listaFilme)):
         if(i < 5):
-            grafo.adj['acao'].append(listaFilme[i])
+            grafo.adicionarAresta(listaFilme[i], procurarPorGenero(listaDeGenero, 'acao'))
         elif(i < 10):
-            grafo.adj['comedia'].append(listaFilme[i])
+            grafo.adicionarAresta(listaFilme[i], procurarPorGenero(listaDeGenero, 'comedia'))
         elif(i < 15):
-            grafo.adj['terror'].append(listaFilme[i])
+            grafo.adicionarAresta(listaFilme[i], procurarPorGenero(listaDeGenero, 'terror'))
         elif(i < 20):
-            grafo.adj['suspense'].append(listaFilme[i])
+            grafo.adicionarAresta(listaFilme[i], procurarPorGenero(listaDeGenero, 'suspense'))
         elif(i < 25):
-            grafo.adj['ficcao'].append(listaFilme[i])
+            grafo.adicionarAresta(listaFilme[i], procurarPorGenero(listaDeGenero, 'ficcao'))
         elif(i < 30):
-            grafo.adj['romance'].append(listaFilme[i])
+            grafo.adicionarAresta(listaFilme[i], procurarPorGenero(listaDeGenero, 'romance'))
 
 if __name__ == '__main__':
     user = []
     reccomendationVector = []
     operacao = True
-    grafo = Grafos(len(listaGeneros), listaGeneros)
-    preecherAresta(filmes, grafo)
+    grafo = Grafos(len(listaGeneros) + len(filmes), listaGeneros)
+    preecherAresta(filmes, grafo, listaGeneros)
     grafo.printarGrafos()
     '''
     R -> buscar recomendação
@@ -44,6 +50,10 @@ if __name__ == '__main__':
                 print(filme)
         elif opc.upper().strip() == 'R':
             print('>>> Listar Recomendacoes')
+            dicEscala = Filme.distribuicaoEscala(user)
+            print(dicEscala)
+            lista = grafo.dfs(listaGeneros[0], 'acao')
+            print(lista)
         elif opc.upper().strip() == 'U':
             print('>>> Listando filmes marcados para ver')
             for filmeVisto in user:
@@ -62,4 +72,3 @@ if __name__ == '__main__':
             operacao = False
         else:
             print(f'>>> Digitou errado: {opc}')
-    print('ola mundo')
