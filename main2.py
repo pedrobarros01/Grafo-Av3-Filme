@@ -23,17 +23,18 @@ lista = [vertice.name for vertice in listaGeneros]
 lista.extend([vertice.name for vertice in filmes])
 print(lista)
 g.vs["name"] = lista
-fig, ax = plt.subplots(figsize=(5,5))
+fig, ax = plt.subplots(figsize=(10,10))
 ig.plot(
     g,
     target=ax,
-    layout="circle", # print nodes in a circular layout
-    vertex_size=0.1,
-    vertex_frame_width=1.0,
+    layout = g.layout_reingold_tilford(mode="in", root=[0]),
+    vertex_size=0.8,
     vertex_label=g.vs["name"],
-    vertex_label_size=7.0,
+    vertex_label_size=8.0,
+    
 )
 plt.show()
+fig.savefig('graph.svg')
 
 '''preecherAresta(filmes, digrafo, listaGeneros)
 digrafo.printarGrafos()
