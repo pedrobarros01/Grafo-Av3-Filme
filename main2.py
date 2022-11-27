@@ -27,21 +27,23 @@ fig, ax = plt.subplots(figsize=(10,10))
 ig.plot(
     g,
     target=ax,
-    layout = g.layout_reingold_tilford(mode="in", root=[0]),
-    vertex_size=0.8,
+    vertex_size=0.95,
     vertex_label=g.vs["name"],
-    vertex_label_size=8.0,
+    vertex_label_size=6.0
     
 )
 plt.show()
 fig.savefig('graph.svg')
 
-'''preecherAresta(filmes, digrafo, listaGeneros)
+'''
+preecherAresta(filmes, digrafo, listaGeneros)
 digrafo.printarGrafos()
 user = [filme3, filme4, filme5, filme19, filme18]
 escala = Filme.distribuicaoEscala(user)
 print('escala: ' + escala.__str__())
 print(escala['acao'])
 dicRecomendacao = digrafo.BuscaPorRecomendacao(escala, genero)
-print(dicRecomendacao)'''
+print(dicRecomendacao)
+'''
+
 

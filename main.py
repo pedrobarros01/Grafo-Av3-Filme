@@ -1,5 +1,5 @@
 from Filme.filme import Filme
-from mocks import filmes, listaGeneros
+from mocks import filmes, listaGeneros, genero
 from graph import Grafos
 
 def procurarPorGenero(listaDeGenero, genero):
@@ -36,7 +36,6 @@ if __name__ == '__main__':
     '''
     while operacao:
         opc = input('>>> O que deseja fazer: (V/L/R/U/D/F)')
-
         if opc.upper().strip() == 'V':
             nomeFilme = input('>>> Qual o nome do filme: ')
             filmeAdd = None
@@ -44,7 +43,10 @@ if __name__ == '__main__':
                 if nomeFilme.upper() == filme.name.upper():
                     filmeAdd = filme
                     break
-            user.append(filmeAdd)
+            if filmeAdd:
+                user.append(filmeAdd)
+            else:
+                print('>>> Nao encontrado filme na lista de filmes')
         elif opc.upper().strip() == 'L':
             for filme in filmes:
                 print(filme)
@@ -52,8 +54,8 @@ if __name__ == '__main__':
             print('>>> Listar Recomendacoes')
             dicEscala = Filme.distribuicaoEscala(user)
             print(dicEscala)
-            lista = grafo.dfs(listaGeneros[0], 'acao')
-            print(lista)
+            dicRecomendacao = grafo.BuscaPorRecomendacao(dicEscala, genero)
+            print(dicRecomendacao)
         elif opc.upper().strip() == 'U':
             print('>>> Listando filmes marcados para ver')
             for filmeVisto in user:
@@ -66,7 +68,10 @@ if __name__ == '__main__':
                 if nomeFilme.upper() == filme.upper():
                     filmeDelete = filme
                     break
-            user.remove(filmeDelete)
+            if filmeDelete:
+                user.remove(filmeDelete)
+            else:
+                print('>>> Filme nao encontrado na sua lista')
         elif opc.upper().strip() == 'F':
             print('>>> Terminando operacao')
             operacao = False
