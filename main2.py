@@ -1,6 +1,6 @@
 from graph import Grafos
 from mocks import listaGeneros, filmes, genero, filme7, filme10, filme12
-from Filme.filme import Filme
+from filme import Filme
 from auxiliares import preecherAresta, preecherArestaLista
 import igraph as ig
 import matplotlib.pyplot as plt

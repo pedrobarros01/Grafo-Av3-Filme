@@ -1,4 +1,4 @@
-from Filme.filme import Filme
+from filme import Filme
 from mocks import filmes, listaGeneros, genero
 from graph import Grafos
 from auxiliares import preecherAresta

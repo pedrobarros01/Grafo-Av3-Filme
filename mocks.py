@@ -1,5 +1,5 @@
 
-from Filme.filme import Filme
+from filme import Filme
 FILME = 1
 GENERO = 0
 id = 0
