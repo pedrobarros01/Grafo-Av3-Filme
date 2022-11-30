@@ -1,7 +1,7 @@
 from Filme.filme import Filme
 from mocks import filmes, listaGeneros, genero
 from graph import Grafos
-from middlewares import preecherAresta
+from auxiliares import preecherAresta
 if __name__ == '__main__':
     user = []
     reccomendationVector = []
@@ -9,13 +9,19 @@ if __name__ == '__main__':
     numVertices = len(listaGeneros) + len(filmes)
     grafo = Grafos(numVertices, listaGeneros, filmes, True)
     preecherAresta(filmes, grafo, listaGeneros)
+    objRecomendacao = None
     '''
     R -> buscar recomendação
     V -> Ver filme, adicionar no vetor User
     L -> listar catalogo de filme
+    U -> Visualizat vetor de user
+    D -> deletar um filme de user
+    G -> visualizar grafos de filme
+    P -> visualizar grafos de recomendacao
+    F -> terminar operacao
     '''
     while operacao:
-        opc = input('>>> O que deseja fazer: (V/L/R/U/D/F)')
+        opc = input('>>> O que deseja fazer: (V/L/R/U/D/G/P/F)')
         if opc.upper().strip() == 'V':
             nomeFilme = input('>>> Qual o nome do filme: ')
             filmeAdd = None
@@ -34,8 +40,8 @@ if __name__ == '__main__':
             print('>>> Listar Recomendacoes')
             dicEscala = Filme.distribuicaoEscala(user)
             print(dicEscala)
-            dicRecomendacao = grafo.BuscaPorRecomendacao(dicEscala, genero)
-            print(dicRecomendacao)
+            objRecomendacao = grafo.BuscaPorRecomendacao(dicEscala, genero)
+            print(objRecomendacao)
         elif opc.upper().strip() == 'U':
             print('>>> Listando filmes marcados para ver')
             for filmeVisto in user:
@@ -52,6 +58,13 @@ if __name__ == '__main__':
                 user.remove(filmeDelete)
             else:
                 print('>>> Filme nao encontrado na sua lista')
+        elif opc.upper().strip() == 'G':
+            grafo.visualizarGrafoFilmes()
+        elif opc.upper().strip() == 'P':
+            if objRecomendacao != None:
+                grafo.visualizarGrafoRecomendacao(objRecomendacao)
+            else:
+                print('>>> Dados insuficiente para criar grafos')
         elif opc.upper().strip() == 'F':
             print('>>> Terminando operacao')
             operacao = False

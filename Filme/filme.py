@@ -97,12 +97,10 @@ class Filme:
             'ficcao': 0,
             'romance': 0
         }
-        print('dicEscala: '+ dicEscala.__str__())
         dicResposta = dicFilmes.copy()
         for chave in dicEscala:
             peso = dicEscala[chave] / totalUservector
             dicFilmes[chave] = peso
-        print('dicFilmes: '+ dicFilmes.__str__())
         for chave in dicResposta:
             dicResposta[chave] = round(dicFilmes[chave] * totalRecommedation)
         return dicResposta
