@@ -118,11 +118,12 @@ class Grafos:
     
     def modificarPeso(self, genero, escala):
         subgrafo = self.adj[genero]
-        lista = [(vertice, ind) for ind, vertice in enumerate (subgrafo)]
+        lista = [(filme, indice) for indice, filme in enumerate(subgrafo)]
+        print(lista)
         for vertice, ind in enumerate(subgrafo):
             self.adj[genero][vertice].peso = 0
         peso = []
-        while len(peso) != escala:
+        while len(peso) != escala and len(lista) != 0:
             vertice, ind = lista.pop(0)
             colocaEle = randint(0, 1)
             if colocaEle and not vertice.peso:
