@@ -119,9 +119,10 @@ class Grafos:
     def modificarPeso(self, genero, escala):
         subgrafo = self.adj[genero]
         lista = [(vertice, ind) for ind, vertice in enumerate (subgrafo)]
-        operacao = True
+        for vertice, ind in enumerate(subgrafo):
+            self.adj[genero][vertice].peso = 0
         peso = []
-        while operacao:
+        while len(peso) != escala:
             vertice, ind = lista.pop(0)
             colocaEle = randint(0, 1)
             if colocaEle and not vertice.peso:
@@ -129,8 +130,6 @@ class Grafos:
                 peso.append(vertice)
             else:
                 lista.append((vertice, ind))
-            if len(peso) == escala:
-                operacao = False
             
     def BuscaPorRecomendacao(self, escalaDic, raiz):
         for chave in escalaDic:
