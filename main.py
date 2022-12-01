@@ -38,33 +38,39 @@ if __name__ == '__main__':
                 print(filme)
         elif opc.upper().strip() == 'R':
             print('>>> Listar Recomendacoes')
-            dicEscala = Filme.distribuicaoEscala(user)
-            print(dicEscala)
-            objRecomendacao = grafo.BuscaPorRecomendacao(dicEscala, genero)
-            print(objRecomendacao)
+            if len(user) != 0:
+                dicEscala = Filme.distribuicaoEscala(user)
+                print(dicEscala)
+                objRecomendacao = grafo.BuscaPorRecomendacao(dicEscala, genero)
+                print(objRecomendacao)
+            else:
+                print('>>> Sua lista de filmes esta vazia')
         elif opc.upper().strip() == 'U':
             print('>>> Listando filmes marcados para ver')
             for filmeVisto in user:
                 print(filmeVisto)
         elif opc.upper().strip() == 'D':
-            print('>>> Delete um filme')
-            nomeFilme = input('>>> Nome do filme Visto: ')
-            filmeDelete = None
-            for filme in filmes:
-                if nomeFilme.upper() == filme.upper():
-                    filmeDelete = filme
-                    break
-            if filmeDelete:
-                user.remove(filmeDelete)
+            if len(user) != 0:
+                print('>>> Delete um filme')
+                nomeFilme = input('>>> Nome do filme Visto: ')
+                filmeDelete = None
+                for filme in filmes:
+                    if nomeFilme.upper() == filme.upper():
+                        filmeDelete = filme
+                        break
+                if filmeDelete:
+                    user.remove(filmeDelete)
+                else:
+                    print('>>> Filme nao encontrado na sua lista')
             else:
-                print('>>> Filme nao encontrado na sua lista')
+                print('>>> Sua lista de filmes esta vazia')
         elif opc.upper().strip() == 'G':
             grafo.visualizarGrafoFilmes()
         elif opc.upper().strip() == 'P':
             if objRecomendacao != None:
                 grafo.visualizarGrafoRecomendacao(objRecomendacao)
             else:
-                print('>>> Dados insuficiente para criar grafos')
+                print('>>> Dados insuficiente para criar grafo')
         elif opc.upper().strip() == 'F':
             print('>>> Terminando operacao')
             operacao = False
